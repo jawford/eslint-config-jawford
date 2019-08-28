@@ -1,18 +1,19 @@
 # Eslint + Prettier Config
-Personal settings for ESLint and Prettier
+Personal settings for ESLint and Prettier. Legacy methods ran the linter off the formatter but now the recomendation is the other way round. 
+(prettier-eslint is not recommended anymore)
 
 ## Aims
 
-* Extendable Rules based on best practice
+* Extendable Rules based on airbnb
 * Code quality fixed with TS/ESLint
-* Format errors fixed with Prettier (ought to disable any conflicting format rules in the linter)
+* Format errors fixed with Prettier (conflicting format rules in the linter are disabled)
 * Lints + Fixes for html script tags
 * Lints + Fixes for React via eslint-config-airbnb
-* [rules here](https://github.com/jawford/eslint-config-jawford/blob/master/.eslintrc.js) - Overwritable per project.
+* [rules here](https://github.com/jawford/eslint-config-jawford/blob/master/.eslintrc.js)
 
 ## Outline Steps
-Either add an extension to the linting tool to format files with Prettier, ```eslint-plugin-prettier```, 
-so there's only a single command to process a file, or run the linter and then Prettier as separate steps.
+Add an extension to the linting tool to format files with Prettier, ```eslint-plugin-prettier```. 
+There's only a single command to process a file.
 
 ### ```eslint-config-prettier``` Disable ESLint formatting
 This config disables ESLint's formatting rules that conflict with Prettier. It is extended from within .eslintrc configuration, 
@@ -44,7 +45,7 @@ Here both ```eslint-plugin-prettier``` and ```eslint-config-prettier``` are conf
 ```tslint-config-prettier``` and ```tslint-plugin-prettier``` are analogous to the above for Typescript formatting.
 
 ## This project's dependencies
-Getting these packages into the end project by using regular dependencies not devDependencies
+Must get these packages into the end project hence use of dependencies not devDependencies
 
 ```json
 	"dependencies": {
