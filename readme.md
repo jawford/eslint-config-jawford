@@ -198,3 +198,19 @@ Globally
 ```bash
 npm remove --global eslint-config-jawford babel-eslint eslint eslint-config-prettier eslint-config-airbnb eslint-plugin-html eslint-plugin-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react prettier eslint-plugin-react-hooks
 ```
+
+# Resources
+
+### [Integrating Prettier with linters](https://prettier.io/docs/en/integrating-with-linters.html)
+
+### Prettier-VSCode 
+specific settings for extension [Prettier-VSCode](https://github.com/prettier/prettier-vscode)
+
+* `prettier.requireConfig` (default: false)  
+Require a 'prettierconfig' to format
+
+* `prettier.ignorePath` (default: .prettierignore)  
+Supply the path to an ignore file such as .gitignore or .prettierignore. Files which match will not be formatted. Set to null to not read ignore files. Restart required.
+
+* `prettier.disableLanguages` (default: ["vue"])  
+A list of languages IDs to disable this extension on. Restart required. Note: Disabling a language enabled in a parent folder will prevent formatting instead of letting any other formatter to run
