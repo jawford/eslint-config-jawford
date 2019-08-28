@@ -2,7 +2,7 @@ module.exports = {
 	"extends": [
 		"airbnb",
 		"prettier",
-		"prettier/react"
+		"prettier/react",
 	],
 	"parser": "babel-eslint",
 	"parserOptions": {
@@ -117,7 +117,7 @@ module.exports = {
 			{
 				"trailingComma": "es5",
 				"singleQuote": true,
-				"printWidth": 80,
+				"printWidth": 120,
 			}
 		],
 		"jsx-a11y/href-no-hash": "off",

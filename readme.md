@@ -2,19 +2,70 @@
 Personal settings for ESLint and Prettier
 
 ## Aims
-* JS Rules based on best practice, and personal taste
-* JS Format errors fixed with Prettier
+
+* Extendable Rules based on best practice
+* Code quality fixed with TS/ESLint
+* Format errors fixed with Prettier (ought to disable any conflicting format rules in the linter)
 * Lints + Fixes for html script tags
 * Lints + Fixes for React via eslint-config-airbnb
 * [rules here](https://github.com/jawford/eslint-config-jawford/blob/master/.eslintrc.js) - Overwritable per project.
 
+## Outline Steps
+Either add an extension to the linting tool to format files with Prettier, ```eslint-plugin-prettier```, 
+so there's only a single command to process a file, or run the linter and then Prettier as separate steps.
+
+### ```eslint-config-prettier``` Disable ESLint formatting
+This config disables ESLint's formatting rules that conflict with Prettier. It is extended from within .eslintrc configuration, 
+In .eslintrc this is position sensitive so that it overrides other configs like ```eslint-config-airbnb```. 
+
+```json
+  "extends": ["airbnb", "prettier"]
+```
+
+### ```eslint-plugin-prettier``` Uses ESLint to run Prettier
+This plugin adds a rule that formats content using Prettier. 
+In .eslintrc this enables the plugin and sets the rule. Prettier will be run by ESLint.
+
+```json
+  "plugins": ["prettier"],
+  "rules": { "prettier/prettier": "error" }
+```
+
+### Single "Recomended" Configuration, Combination Step
+The eslint-plugin-prettier can be extended like a config. 
+Here both ```eslint-plugin-prettier``` and ```eslint-config-prettier``` are configured together in a single "recomended" step.
+
+```json
+  "extends": ["plugin:prettier/recommended"]
+}
+```
+
+### TSLint
+```tslint-config-prettier``` and ```tslint-plugin-prettier``` are analogous to the above for Typescript formatting.
+
 ## Installing
+After an npm install there are an abundance of dependencies in node_modules:
 
-Install eslint globally and/or locally per project.
+```json
+	"dependencies": {
+		"babel-eslint": "^9.0.0",
+		"eslint": "^5.14.1",
+		"eslint-config-airbnb": "^17.1.0",
+		"eslint-config-prettier": "^4.1.0",
+		"eslint-plugin-html": "^5.0.3",
+		"eslint-plugin-import": "^2.16.0",
+		"eslint-plugin-jsx-a11y": "^6.2.1",
+		"eslint-plugin-prettier": "^3.0.1",
+		"eslint-plugin-react": "^7.12.4",
+		"eslint-plugin-react-hooks": "^1.3.0",
+		"prettier": "^1.16.4"
+	}
+```
 
-Install this locally per project to allow project specific settings.
-
-Install this globally, along with eslint, for projects or rogue JS without their own specific setup.
+Also install
+* eslint globally and/or locally per project.
+* this package locally per project, to allow project specific settings.
+* this package globally, along with eslint, for projects or rogue JS files without their own specific setup.
 
 ## Local Install
 
@@ -109,17 +160,18 @@ To lint and fix on file save
 By default VS Code tries to beautify code with its own built-in beautifier
   ```js
   // auto beautify on save? yes, but...
-  "editor.formatOnSave": true,
   // ...turn off the built-in version within JS & JSX language
+  // ...and run the ESLint extension autoFixOnSave
+  // If the prettier extension is used & enabled for other languages like CSS and HTML, then turn it off for JS since it will run via Eslint already
+
+  "editor.formatOnSave": true,
   "[javascript]": {
     "editor.formatOnSave": false
   },
   "[javascriptreact]": {
     "editor.formatOnSave": false
   },
-  // ...and run the ESLint extension on save
   "eslint.autoFixOnSave": true,
-  // If the prettier extension is used & enabled for other languages like CSS and HTML, then turn it off for JS since it will run via Eslint already
   "prettier.disableLanguages": ["javascript", "javascriptreact"],
   ```
 
