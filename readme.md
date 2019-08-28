@@ -43,8 +43,8 @@ Here both ```eslint-plugin-prettier``` and ```eslint-config-prettier``` are conf
 ### TSLint
 ```tslint-config-prettier``` and ```tslint-plugin-prettier``` are analogous to the above for Typescript formatting.
 
-## Installing
-After an npm install there are an abundance of dependencies in node_modules:
+## This project's dependencies
+Getting these packages into the end project by using regular dependencies not devDependencies
 
 ```json
 	"dependencies": {
@@ -62,34 +62,57 @@ After an npm install there are an abundance of dependencies in node_modules:
 	}
 ```
 
-Also install
+# Usage
+
+## Installations on Target System
 * eslint globally and/or locally per project.
-* this package locally per project, to allow project specific settings.
+* this package locally per project will allow project specific settings.
 * this package globally, along with eslint, for projects or rogue JS files without their own specific setup.
 
-## Local Install
+## Local Installation
+[eslint rules here](https://eslint.org/docs/rules/) see below`"rules"`.  
+[prettier rules here](https://prettier.io/docs/en/options.html) see below `"prettier/prettier"`.
 
-1. npm initialisation
+1. Install this package's peer dependencies into devDependencies, as well as the config itself:  
+`npm i -D eslint-config-jawford`
 
-2. Install this package's peer dependencies into devDependencies, as well as the config itself:
+2. Check node_modules contains dependencies, above
 
-```
-npx install-peerdeps --dev eslint-config-jawford
-```
+3. Create `.eslintrc`, at root next to package.json
 
-3. Check local devDependencies contain those peer-deps
-
-4. Create `.eslintrc`, at root next to package.json:
+4. Adding another Prettier rule in a local project's `.eslintrc` (e.g. useTabs below) 
+will override the defaults from this package, so copy those over too.
 
 ```json
 {
-  "extends": [
-    "jawford"
-  ]
-}
-```
+	"extends": [
+		"jawford"
+	],
+	"rules": {
+		"no-console": 2,
+		"prettier/prettier": [
+			"error",
+			{
+				"useTabs": true,
+				"trailingComma": "es5",
+				"singleQuote": true,
+				"printWidth": 120
+			}
+		]
+	}
+}```
 
 Alternatively add this object directly in `package.json` under the property `"eslintConfig":`
+
+```json
+{
+  "eslintConfig": {
+    "extends": [
+      "jawford"
+    ]
+  }
+}
+```
 
 5. Optionally add two scripts to package.json to manually lint and/or fix by running `npm run lint`, or `npm run lint:fix`:
 
@@ -123,47 +146,21 @@ npx install-peerdeps --global eslint-config-jawford
 
 3. CLI invocation is `eslint .` — or use an editor/IDE to run this e.g. on file saves
 
-## Local Project Settings
-
-Extend / override these settings with local rules in a `.eslintrc` file.  
-[eslint rules here](https://eslint.org/docs/rules/) see below`"rules"`.  
-[prettier rules here](https://prettier.io/docs/en/options.html) see below `"prettier/prettier"`.
-
-Prettier rules will overwrite anything in this config (trailing comma, and single quote), so you'll need to include those as well. 
-
-```json
-{
-  "extends": [
-    "jawford"
-  ],
-  "rules": {
-    "no-console": 2,
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "es5",
-        "singleQuote": true,
-        "printWidth": 120,
-        "tabWidth": 8,
-      }
-    ]
-  }
-}
-```
-
-## VS Code
+# VS Code Settings
 
 To lint and fix on file save
 
 1. Install the [Dirk Baeumer's ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-2. Preference settings to make eslint run **on file save**  
+2. Add preference settings to make eslint run **on file save**  
 By default VS Code tries to beautify code with its own built-in beautifier
-  ```js
-  // auto beautify on save? yes, but...
-  // ...turn off the built-in version within JS & JSX language
-  // ...and run the ESLint extension autoFixOnSave
-  // If the prettier extension is used & enabled for other languages like CSS and HTML, then turn it off for JS since it will run via Eslint already
 
+* auto beautify on save? yes, but...  
+...turn off the built-in version within JS & JSX language  
+...and run the ESLint extension via autoFixOnSave  
+If the VS Code prettier extension is used & enabled for other languages like CSS and HTML, 
+then turn it off for JS since it will run via Eslint already. If not installed the last setting has no effect / is not recognised.
+
+```json
   "editor.formatOnSave": true,
   "[javascript]": {
     "editor.formatOnSave": false
@@ -173,21 +170,30 @@ By default VS Code tries to beautify code with its own built-in beautifier
   },
   "eslint.autoFixOnSave": true,
   "prettier.disableLanguages": ["javascript", "javascriptreact"],
-  ```
+```
 
 ## With Create React App
 
 1. Eject `npm run eject`
-1. Install `npx install-peerdeps --dev eslint-config-wesbos`
+
+1. Install `npm i -D eslint-config-jawford`
+
 1. Edit `package.json` and replace `"extends": "react-app"` with `"extends": "jawford"`
 
+# Something Wrong?
 
-## NOT WORKING?
+* Check versions of the installed packages and their compatibility
 
-Try a re-install globally and locally.
+* A legacy package, `eslint-prettier`, is not working with ESLint version 6
 
+* Try a re-install globally and locally
+
+* Conflicts between Prettier and ESLint occur without the right ESLint or TSLint rules set, as explained in the 
+[Prettier documentation](https://prettier.io/docs/en/integrating-with-linters.html).
+
+Locally remove `package-lock.json` and `node_modules`
+
+Globally
 ```bash
-npm remove [--global] eslint-config-wesbos babel-eslint eslint eslint-config-prettier eslint-config-airbnb eslint-plugin-html eslint-plugin-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react prettier eslint-plugin-react-hooks
+npm remove --global eslint-config-jawford babel-eslint eslint eslint-config-prettier eslint-config-airbnb eslint-plugin-html eslint-plugin-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react prettier eslint-plugin-react-hooks
 ```
-
-Locally remove `package-lock.json` and `node_modules/`
