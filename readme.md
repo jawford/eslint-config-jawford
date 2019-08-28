@@ -9,7 +9,7 @@ Personal settings for ESLint and Prettier. Legacy methods ran the linter off the
 * Format errors fixed with Prettier (conflicting format rules in the linter are disabled)
 * Lints + Fixes for html script tags
 * Lints + Fixes for React via eslint-config-airbnb
-* [rules here](https://github.com/jawford/eslint-config-jawford/blob/master/.eslintrc.js)
+* [rules file](https://github.com/jawford/eslint-config-jawford/blob/master/.eslintrc.js)
 
 ## Outline Steps
 Add an extension to the linting tool to format files with Prettier, ```eslint-plugin-prettier```. 
@@ -17,7 +17,7 @@ There's only a single command to process a file.
 
 ### ```eslint-config-prettier``` Disable ESLint formatting
 This config disables ESLint's formatting rules that conflict with Prettier. It is extended from within .eslintrc configuration, 
-In .eslintrc this is position sensitive so that it overrides other configs like ```eslint-config-airbnb```. 
+In .eslintrc this is position sensitive so that it overrides other configs like ```eslint-config-airbnb```.
 
 ```json
   "extends": ["airbnb", "prettier"]
