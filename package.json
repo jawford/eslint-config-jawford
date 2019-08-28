@@ -1,11 +1,47 @@
 {
-  "name": "eslint-config-jawford",
-  "version": "1.0.0",
-  "description": "personal config package for eslint and prettier",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+	"name": "eslint-config-jawford",
+	"version": "0.1.0",
+	"description": "Personal settings for ESLint and Prettier",
+	"keywords": [
+		"javascript",
+		"ecmascript",
+		"prettier",
+		"eslint",
+		"prettier-eslint",
+		"es6-javascript"
+	],
+	"author": "James Awford",
+	"repository": "git@github.com:wesbos/eslint-config-jawford.git",
+	"license": "MIT",
+	"main": "index.js",
+	"scripts": {
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix"
+	},
+	"peerDependencies": {
+		"babel-eslint": "^9.0.0",
+		"eslint": "^5.14.1",
+		"eslint-config-prettier": "^4.1.0",
+		"eslint-config-airbnb": "^17.1.0",
+		"eslint-plugin-html": "^5.0.3",
+		"eslint-plugin-prettier": "^3.0.1",
+		"eslint-plugin-import": "^2.16.0",
+		"eslint-plugin-jsx-a11y": "^6.2.1",
+		"eslint-plugin-react": "^7.12.4",
+		"eslint-plugin-react-hooks": "^1.3.0",
+		"prettier": "^1.16.4"
+	},
+	"devDependencies": {
+		"babel-eslint": "^9.0.0",
+		"eslint": "^5.14.1",
+		"eslint-config-airbnb": "^17.1.0",
+		"eslint-config-prettier": "^4.1.0",
+		"eslint-plugin-html": "^5.0.3",
+		"eslint-plugin-import": "^2.16.0",
+		"eslint-plugin-jsx-a11y": "^6.2.1",
+		"eslint-plugin-prettier": "^3.0.1",
+		"eslint-plugin-react": "^7.12.4",
+		"eslint-plugin-react-hooks": "^1.3.0",
+		"prettier": "^1.16.4"
+	}
 }
