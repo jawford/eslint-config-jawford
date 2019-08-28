@@ -105,12 +105,12 @@ Prettier rules will overwrite anything in this config (trailing comma, and singl
 To lint and fix on file save
 
 1. Install the [Dirk Baeumer's ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-2. Preference settings to **run on save**  
+2. Preference settings to make eslint run **on file save**  
 By default VS Code tries to beautify code with its own built-in beautifier
   ```js
   // auto beautify on save? yes, but...
   "editor.formatOnSave": true,
-  // ...within JS & JSX turn off the built-in
+  // ...turn off the built-in version within JS & JSX language
   "[javascript]": {
     "editor.formatOnSave": false
   },
