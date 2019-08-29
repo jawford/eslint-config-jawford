@@ -30,5 +30,6 @@
 		"eslint-plugin-react": "^7.14.3",
 		"eslint-plugin-react-hooks": "^1.7.0",
 		"prettier": "^1.18.2"
-	}
+	},
+	"bump": "npm i babel-eslint eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-html eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier"
 }
