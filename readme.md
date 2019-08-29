@@ -11,9 +11,10 @@ Personal settings for ESLint and Prettier. Legacy methods ran the linter off the
 * Lints + Fixes for React via eslint-config-airbnb
 * [rules file](https://github.com/jawford/eslint-config-jawford/blob/master/.eslintrc.js)
 
-## Outline Steps
-Add an extension to the linting tool to format files with Prettier, ```eslint-plugin-prettier```. 
-There's only a single command to process a file.
+## Implementation
+Extensions are added to ESLint, e.g. to format files with Prettier, ```eslint-plugin-prettier```.  
+Which means that only the single invocation of eslint is required to process a file,  
+there is no additional need to invoke `prettier`.
 
 ### ```eslint-config-prettier``` Disable ESLint formatting
 This config disables ESLint's formatting rules that conflict with Prettier. It is extended from within .eslintrc configuration, 
@@ -32,20 +33,18 @@ In .eslintrc this enables the plugin and sets the rule. Prettier will be run by 
   "rules": { "prettier/prettier": "error" }
 ```
 
-### Single "Recomended" Configuration, Combination Step
-The eslint-plugin-prettier can be extended like a config. 
-Here both ```eslint-plugin-prettier``` and ```eslint-config-prettier``` are configured together in a single "recomended" step.
-
-```json
-  "extends": ["plugin:prettier/recommended"]
-}
-```
-
 ### TSLint
 ```tslint-config-prettier``` and ```tslint-plugin-prettier``` are analogous to the above for Typescript formatting.
 
-## This project's dependencies
-Must get these packages into the end project hence use of dependencies not devDependencies
+# Dependencies
+Get these packages into the end project hence use of dependencies in this package, not devDependencies.
+
+### Version Bumping — package list
+```babel-eslint eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-html eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier```
+
+* Update local project with `npm i -D`
+
+* Update this package with `npm i`, eg:
 
 ```json
 	"dependencies": {
@@ -71,18 +70,18 @@ Must get these packages into the end project hence use of dependencies not devDe
 * this package globally, along with eslint, for projects or rogue JS files without their own specific setup.
 
 ## Local Installation
-[eslint rules here](https://eslint.org/docs/rules/) see below`"rules"`.  
-[prettier rules here](https://prettier.io/docs/en/options.html) see below `"prettier/prettier"`.
+[ESLint rules descriptions](https://eslint.org/docs/rules/) `"rules"` object, below.  
+[Prettier rules descriptions](https://prettier.io/docs/en/options.html) `"rules"."prettier/prettier"` array, below.
 
-1. Install this package's peer dependencies into devDependencies, as well as the config itself:  
-`npm i -D eslint-config-jawford`
+1. Install this package, for the common config file .eslintrc.js:  
+`npm i -D eslint-config-jawford`  
 
-2. Check node_modules contains dependencies, above
+2. Ensure node_modules contains the dependencies list, above
 
 3. Create `.eslintrc`, at root next to package.json
 
-4. Adding another Prettier rule in a local project's `.eslintrc` (e.g. useTabs below) 
-will override the defaults from this package, so copy those over too.
+4. Adding any other Prettier rule to a local project's `.eslintrc` (e.g. `useTabs` below) 
+will override all the defaults set in this package, so copy them over also.
 
 ```json
 {
@@ -127,15 +126,15 @@ Alternatively add this object directly in `package.json` under the property `"es
 The preference is probably to let the editor do this. See below
 
 ## Global Install
-After testing the local per-project setup this package can also be added to the global npm setup for ad-hoc usage
+This package can also be added to the global npm setup for ad-hoc file or project use
 
 1. Global install
 
 ```
-npx install-peerdeps --global eslint-config-jawford
+npm i --global eslint-config-jawford
 ```
 
-2. Minimal global `~/.eslintrc` (or `C:\Users\username\.eslintrc`)
+2. Global `~/.eslintrc` is minimal. (or `C:\Users\username\.eslintrc`)
 
 ```json
 {
@@ -151,7 +150,7 @@ npx install-peerdeps --global eslint-config-jawford
 
 To lint and fix on file save
 
-1. Install the [Dirk Baeumer's ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+1. Install the [Dirk Baeumer ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 2. Add preference settings to make eslint run **on file save**  
 By default VS Code tries to beautify code with its own built-in beautifier
 
@@ -173,7 +172,7 @@ then turn it off for JS since it will run via Eslint already. If not installed t
   "prettier.disableLanguages": ["javascript", "javascriptreact"],
 ```
 
-## With Create React App
+# Create React App
 
 1. Eject `npm run eject`
 
@@ -185,16 +184,15 @@ then turn it off for JS since it will run via Eslint already. If not installed t
 
 * Check versions of the installed packages and their compatibility
 
-* A legacy package, `eslint-prettier`, is not working with ESLint version 6
-
-* Try a re-install globally and locally
+* Older projects used legacy techniques with `eslint-prettier` which doesn't work with eslint v6
 
 * Conflicts between Prettier and ESLint occur without the right ESLint or TSLint rules set, as explained in the 
 [Prettier documentation](https://prettier.io/docs/en/integrating-with-linters.html).
 
-Locally remove `package-lock.json` and `node_modules`
+* To re-install locally or globally
 
-Globally
+remove `package-lock.json` and `node_modules`
+
 ```bash
 npm remove --global eslint-config-jawford babel-eslint eslint eslint-config-prettier eslint-config-airbnb eslint-plugin-html eslint-plugin-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react prettier eslint-plugin-react-hooks
 ```
@@ -204,7 +202,9 @@ npm remove --global eslint-config-jawford babel-eslint eslint eslint-config-pret
 ### [Integrating Prettier with linters](https://prettier.io/docs/en/integrating-with-linters.html)
 
 ### Prettier-VSCode 
-specific settings for extension [Prettier-VSCode](https://github.com/prettier/prettier-vscode)
+This extension will allow the editor to invoke a formatter for HTML, CSS.  
+But it's not necessary for JS as VSCode is already calling `eslint`, which calls `prettier`.  
+Here are the settings for the extension [Prettier-VSCode](https://github.com/prettier/prettier-vscode)
 
 * `prettier.requireConfig` (default: false)  
 Require a 'prettierconfig' to format
