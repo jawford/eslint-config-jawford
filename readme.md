@@ -39,12 +39,8 @@ In .eslintrc this enables the plugin and sets the rule. Prettier will be run by 
 # Dependencies
 Get these packages into the end project hence use of dependencies in this package, not devDependencies.
 
-### Version Bumping — package list
-```babel-eslint eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-html eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier```
-
-* Update local project with `npm i -D`
-
-* Update this package with `npm i`, eg:
+### Packages
+These initial versions worked fine together
 
 ```json
 	"dependencies": {
@@ -189,13 +185,11 @@ then turn it off for JS since it will run via Eslint already. If not installed t
 * Conflicts between Prettier and ESLint occur without the right ESLint or TSLint rules set, as explained in the 
 [Prettier documentation](https://prettier.io/docs/en/integrating-with-linters.html).
 
-* To re-install locally or globally
+### Re-install locally or globally
 
-remove `package-lock.json` and `node_modules`
+* remove `package-lock.json` and `node_modules`
 
-```bash
-npm remove --global eslint-config-jawford babel-eslint eslint eslint-config-prettier eslint-config-airbnb eslint-plugin-html eslint-plugin-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react prettier eslint-plugin-react-hooks
-```
+* `npm remove --global eslint-config-jawford babel-eslint eslint eslint-config-prettier eslint-config-airbnb eslint-plugin-html eslint-plugin-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react prettier eslint-plugin-react-hooks`
 
 # Resources
 
